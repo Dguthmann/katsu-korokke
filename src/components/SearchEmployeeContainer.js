@@ -6,7 +6,11 @@ import API from "../utils/API";
 class SearchEmployeeContainer extends Component {
   state = {
     search: "",
-    results: []
+    results: [],
+    keySort: true,
+    nameSort: false,
+    locationSort: false,
+    placeholder:[]
   };
 
   // When this component mounts, search the Random API for pictures of kittens
@@ -18,7 +22,14 @@ class SearchEmployeeContainer extends Component {
     // Get 200 Placeholder people from
     // https://randomuser.me/api/?results=200&nat=us
     API.search(query)
-      .then(res => this.setState({ results: res.results }))
+      .then(res => {
+        let i = 1
+        res.data.results.forEach(element => {
+          element.key = i;
+          i++;
+        });
+        this.setState({ results: res.data.results })
+      })
       .catch(err => console.log(err));
   };
 
@@ -34,9 +45,55 @@ class SearchEmployeeContainer extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     // includes method to filter the results down
+    if(this.state.placeholder === [])
+    {
+      this.setState({placeholder: this.state.results})
+    }
+  };
+
+  resetTable = event => {
+    event.preventDefault();
+    // includes method to filter the results down
+    if(this.state.placeholder !== [])
+    {
+     this.setState({results: this.state.placeholder})
+    }
   };
 
   // Need a sort method to handle an onclick even on the name tab.
+  orderByKey = () => {
+    if(this.state.keySort){
+      this.state.results.sort((a, b) => (a.key > b.key) ? -1 : 1)
+      this.setState({ keySort: false })
+    }
+    else {
+    this.state.results.sort((a, b) => (a.key > b.key) ? 1 : -1)
+    this.setState({ keySort: true })
+    }
+  }
+
+  orderByName = () => {
+    if(this.state.nameSort){
+      this.state.results.sort((a, b) => (a.name.last > b.name.last) ? -1 : (a.name.last === b.name.last) ? ((a.name.first > b.name.first) ? -1 : 1) : 1)
+      this.setState({ nameSort: false })
+    }
+    else {
+    this.state.results.sort((a, b) => (a.name.last > b.name.last) ? 1 : (a.name.last === b.name.last) ? ((a.name.first > b.name.first) ? 1 : -1) : -1)
+    this.setState({ nameSort: true })
+    }
+  }
+
+  orderByLocation = () => {
+    if(this.state.locationSort){
+      this.state.results.sort((a, b) => (a.location.state > b.location.state) ? -1 : (a.location.state === b.location.state) ? ((a.location.city > b.location.city) ? -1 : 1) : 1)
+      this.setState({ locationSort: false })
+    }
+    else {
+    this.state.results.sort((a, b) => (a.location.state > b.location.state) ? 1 : (a.location.state === b.name.last) ? ((a.location.city > b.location.city) ? 1 : -1) : -1)
+    this.setState({ locationSort: true })
+    }
+  }
+
 
   render() {
     return (
@@ -46,16 +103,21 @@ class SearchEmployeeContainer extends Component {
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}
           />
+          <div>
+        <button className="btn btn-danger mt-3" onClick={() => this.resetTable()}>Reset Table</button>
+        </div>
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Name</th>
+              <th onClick={() => this.orderByKey()}>#</th>
+              <th scope="col" onClick={() => this.orderByName()}>Name</th>
               <th scope="col">Address</th>
-              <th scope="col">City, State</th>
+              <th scope="col" onClick={() => this.orderByLocation()}>City, State</th>
               <th scope="col">Email</th>
               <th scope="col">Phone</th>
             </tr>
           </thead>
+          {console.log(this.state)}
           <EmployeeList results={this.state.results} />
         </table>
       </div>
