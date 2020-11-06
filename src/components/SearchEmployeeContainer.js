@@ -56,7 +56,8 @@ class SearchEmployeeContainer extends Component {
               <th scope="col">Phone</th>
             </tr>
           </thead>
-          <EmployeeList results={this.state.results} />
+          {console.log(this.state)}
+          {/* <EmployeeList results={this.state.results} /> */}
         </table>
       </div>
     );
