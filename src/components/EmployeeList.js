@@ -5,6 +5,7 @@ function EmployeeList(props) {
     <tbody>
       {props.results.map(result => (
         <tr>
+          <th scope="row">{result.key}</th>
           <td>{result.name.first} {result.name.last}</td>
           <td>{result.location.street.number} {result.location.street.name}</td>
           <td>{result.location.city}, {result.location.state}</td>
