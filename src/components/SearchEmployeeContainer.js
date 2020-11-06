@@ -9,7 +9,8 @@ class SearchEmployeeContainer extends Component {
     results: [],
     keySort: true,
     nameSort: false,
-    locationSort: false
+    locationSort: false,
+    placeholder:[]
   };
 
   // When this component mounts, search the Random API for pictures of kittens
@@ -44,6 +45,19 @@ class SearchEmployeeContainer extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     // includes method to filter the results down
+    if(this.state.placeholder === [])
+    {
+      this.setState({placeholder: this.state.results})
+    }
+  };
+
+  resetTable = event => {
+    event.preventDefault();
+    // includes method to filter the results down
+    if(this.state.placeholder !== [])
+    {
+     this.setState({results: this.state.placeholder})
+    }
   };
 
   // Need a sort method to handle an onclick even on the name tab.
@@ -89,6 +103,9 @@ class SearchEmployeeContainer extends Component {
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}
           />
+          <div>
+        <button className="btn btn-danger mt-3" onClick={() => this.resetTable()}>Reset Table</button>
+        </div>
         <table class="table">
           <thead>
             <tr>
