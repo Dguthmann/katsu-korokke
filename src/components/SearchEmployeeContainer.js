@@ -28,7 +28,8 @@ class SearchEmployeeContainer extends Component {
           element.key = i;
           i++;
         });
-        this.setState({ results: res.data.results })
+        this.setState({ results: res.data.results, placeholder: res.data.results})
+        
       })
       .catch(err => console.log(err));
   };
@@ -45,19 +46,18 @@ class SearchEmployeeContainer extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     // includes method to filter the results down
-    if(this.state.placeholder === [])
-    {
-      this.setState({placeholder: this.state.results})
-    }
+    let firstFilter = this.state.results;
+    let firstAndLastFilter  = firstFilter.filter(obj => (obj.name.first.includes(this.state.search) || obj.name.last.includes(this.state.search)))
+    console.log(firstAndLastFilter)    
+    this.setState({
+      results: firstAndLastFilter
+    })
   };
 
   resetTable = event => {
     event.preventDefault();
     // includes method to filter the results down
-    if(this.state.placeholder !== [])
-    {
      this.setState({results: this.state.placeholder})
-    }
   };
 
   // Need a sort method to handle an onclick even on the name tab.
@@ -104,7 +104,7 @@ class SearchEmployeeContainer extends Component {
             handleInputChange={this.handleInputChange}
           />
           <div>
-        <button className="btn btn-danger mt-3" onClick={() => this.resetTable()}>Reset Table</button>
+        <button className="btn btn-danger mt-3" onClick={this.resetTable}>Reset Table</button>
         </div>
         <table class="table">
           <thead>
