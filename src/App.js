@@ -1,8 +1,8 @@
-import logo from './logo.svg';
+import SearchEmployeeContainer from "./components/SearchEmployeeContainer";
 import './App.css';
 
 function App() {
-  return <SearchResultContainer />;
+  return <SearchEmployeeContainer />;
 }
 
 export default App;
