@@ -8,7 +8,8 @@ class SearchEmployeeContainer extends Component {
     search: "",
     results: [],
     keySort: true,
-    nameSort: false
+    nameSort: false,
+    locationSort: false
   };
 
   // When this component mounts, search the Random API for pictures of kittens
