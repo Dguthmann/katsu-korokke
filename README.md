@@ -1,4 +1,74 @@
-# Getting Started with Create React App
+# Katsu-Korokke
+
+### Author: David Guthmann
+
+github: https://github.com/Dguthmann/katsu-korokke  
+livesite: https://katsu-korokke.herokuapp.com/  
+
+
+## List of Contents
+
+debug.log  
+package.json  
+package-lock.json  
+README.md  
+### public  
+favicon.ico    
+index.html    
+logo192.png  
+logo192.png  
+manifest.json  
+robots.txt  
+### src  
+App.js
+index.js
+#### components  
+EmployeeList.js  
+SearchEmployeeContainer.js  
+SearchForm.js  
+#### utils  
+API.js  
+
+
+## Installation
+you will need the following additional npms to run this project:  
+axios  
+bootstrap  
+react  
+react-dom  
+react-scripts  
+reactstrap  
+web-vitals  
+
+
+## Basic Overview of Project
+
+The goal of the project is to model a small company spanning in the united states where non-privacy theatening information could be accessed quickly.  
+
+
+## Project Functionality
+
+![Site Screenshot](https://media.giphy.com/media/k3kF5UA98VFoTTs6km/giphy.gif)  
+
+
+## Resources Used
+
+Joe Rehfuss for search debugging especially with filter being non-destructive.  
+Aslan Ghodsian for deployment auditing and help.  
+
+
+## Further Development Plans
+
+Styling and some hero cards would be nice to add when time permits, also having the tables have icons to show which direction it's sorted in.  Also to have better search functionality, which is also a limitation of the api used, in which all strings aren't lower cased.  This causes issues with the includes method used for the filter check.  
+
+
+## Changelog
+
+2020-11-06: Working on sort, search functionality,   
+2020-11-05: Creation of initial files, Routing and Axios Requests
+
+
+## Basic Working with React Information
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
